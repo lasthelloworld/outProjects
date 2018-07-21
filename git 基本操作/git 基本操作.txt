@@ -1,0 +1,44 @@
+
+
+
+//新增文件到git
+git add  文件名
+git add -A   保存所有的修改
+git add .     保存新的添加和修改，但是不包括删除
+git add -u   保存修改和删除，但是不包括新建文件。
+注意：add操作都是针对于整个git仓库，不管当前文件夹路径
+
+//提交文件
+git commit -m "msg"
+
+//推送文件
+git push 
+git push -u origin master //推送并创建远端分支
+git push --set-upstream origin master //提交到远端分支
+git push -f origin master //按本地强制提交（一般是本地没有pull最新代码就commit，造成无法推送，就加-f，以本地版本为基准）
+
+问题1：
+Git master branch has no upstream branch的解决：
+(1)无法确定推送到远端那个分支。
+git push --set-upstream origin master //提交到远端分支
+(2)无法确定远端分支是否创建
+git push -u origin master //推送并创建远端分支
+(3)git 上传文件到仓库上提示：origin does not to be a git repository:
+一般是添加的远端库地址有误，删除原来错误的，添加正确的
+git remote remove <name>  
+git remote add <name> git@github.com:yourusername/test.git
+(4)问题git pull origin master时，提示 does not appear to be a git repository，提示Could not read from remote repository.
+
+
+
+//查看分支
+git branch 
+
+
+
+//把多个提交合并为一个提交
+(1)git rebase -i HEAD~4 //从头部开始合并4个提交为1个提交
+(2)之后会弹出一个编辑文本，把对应2~4行的pick 改为squash，代表2,3,4合并到1上提交。
+(3) git add -A
+(4)git rebase --continue 
+(5) git log //可以查看到4合并为1的提交
